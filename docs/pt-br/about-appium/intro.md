@@ -1,6 +1,6 @@
 ## Introdução ao Appium
 
-Appium é uma ferramenta de código aberto para automatizar apps nativos, mobile web e apps híbridos em iOS, Android mobile e Windows desktop platforms.  **Apps nativos** são aqueles escritos usando o iOS, Android, or Windows SDKs.  **Mobile web apps** são acessados usando um navegador para dispositivos móveis (o Appium suporta o Safari no iOS e Chrome ou o app chamado 'Browser' no Android).  **Apps Híbridos** tem um 'wrapper' em torno de uma webview -- um controle nativo que permite interação com o conteúdo web. Projetos como [Phonegap](http://phonegap.com/), facilitam a criação de aplicativos usando tecnologias Web, que são empacotadas em um wrapper nativo, criando um aplicativo híbrido.
+Appium é uma ferramenta open source para automatizar apps nativos, mobile web e apps híbridos em iOS, Android mobile e Windows desktop platforms.  **Apps nativos** são aqueles escritos usando o iOS, Android, or Windows SDKs.  **Mobile web apps** são acessados usando um navegador para dispositivos móveis (o Appium suporta o Safari no iOS e Chrome ou o app chamado 'Browser' no Android).  **Apps Híbridos** tem um 'wrapper' em torno de uma webview -- um controle nativo que permite interação com o conteúdo web. Projetos como [Phonegap](http://phonegap.com/), facilitam a criação de aplicativos usando tecnologias Web, que são empacotadas em um wrapper nativo, criando um aplicativo híbrido.
 
 Importante, Appium é "cross-platform": permite escrever testes contra
 plataforma múltiplas (iOS, Android, Windows), usando a mesma API. Isso permite a reutilização do código entre iOS, Android, e Windows planos de teste.
@@ -19,89 +19,90 @@ Appium foi projetado para atender às necessidades de automação móvel de acor
 
 ### Appium Design
 
-So how does the structure of the Appium project live out this philosophy? We
-meet requirement #1 by using vendor-provided automation frameworks under the
-hood. That way, we don't need to compile in any Appium-specific or
-third-party code or frameworks to your app. This means **you're testing the same app you're shipping**. The vendor-provided frameworks we use are:
+Então, como a estrutura do projeto Appium vive esta filosofia? Nós
+satisfazemos o requisito #1 usando estruturas de automação providas pelo fornecedor "debaixo dos panos". Dessa forma, Nós não precisamos compilar qualquer app específico ou
+código terceiros de frameworks para o seu app. Isso significa que **voce está testando o mesmo app que está entregando**. Os frameworks providos pelo fornecedor são:
 
-* iOS 9.3 and above: Apple's [XCUITest](https://developer.apple.com/reference/xctest)
-* iOS 9.3 and lower: Apple's [UIAutomation](https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/)
+* iOS 9.3 e acima: Apple's [XCUITest](https://developer.apple.com/reference/xctest)
+* iOS 9.3 e abaixo: Apple's [UIAutomation](https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/)
 * Android 4.2+: Google's [UiAutomator](http://developer.android.com/tools/help/uiautomator/index.html)
-* Android 2.3+: Google's [Instrumentation](http://developer.android.com/reference/android/app/Instrumentation.html). (Instrumentation support is provided by bundling a separate project, [Selendroid](http://selendroid.io))
+* Android 2.3+: Google's [Instrumentation](http://developer.android.com/reference/android/app/Instrumentation.html). (O suporte a essa versão é fornecido por um projeto separado, [Selendroid](http://selendroid.io))
 * Windows: Microsoft's [WinAppDriver](http://github.com/microsoft/winappdriver)
 
-We meet requirement #2 by wrapping the vendor-provided frameworks in one API,
-the [WebDriver](http://docs.seleniumhq.org/projects/webdriver/) API.
-WebDriver (aka "Selenium WebDriver") specifies a client-server protocol
-(known as the [JSON Wire Protocol](https://w3c.github.io/webdriver/webdriver-spec.html)).
-Given this client-server architecture, a client written in any language can
-be used to send the appropriate HTTP requests to the server. There are
-already [clients written in every popular programming language](http://appium.io/downloads). This also
-means that you're free to use whatever test runner and test framework you
-want; the client libraries are simply HTTP clients and can be mixed into your
-code any way you please. In other words, Appium & WebDriver clients are not
-technically "test frameworks" -- they are "automation libraries". You can
-manage your test environment any way you like!
+Atendendo o requisito #2, empacotando os frameworks citados pelos fornecedores em uma API,
+o [WebDriver](http://docs.seleniumhq.org/projects/webdriver/) API.
+WebDriver (aka "Selenium WebDriver") especifica um protocolo client-server
+(conhecido como [JSON Wire Protocol](https://w3c.github.io/webdriver/webdriver-spec.html)).
+Dada esta arquitetura 'client-server', um cliente escrito em qualquer linguagem pode
+ser usado para enviar HTTP requests apropriadamente ao servidor. Já existem
+[clientes escritos nas linguagens mais populares](http://appium.io/downloads). Isso também significa
+que voce está livre para usar qualquer 'test runner' e 'test framework' que quiser;
+as bibliotecas são simplesmente 'HTTP clients' e podem ser misturadas em seu
+código da maneira que desejar. Em outras palavras,  os clientes 'Appium & WebDriver' não são
+tecnicamente "test frameworks" -- eles são "bibliotecas de automação". Voce pode
+gerenciar o seu ambiente como quiser!
 
-We meet requirement #3 in the same way: WebDriver has become the de facto
-standard for automating web browsers, and is a [W3C Working Draft](https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html).
-Why do something totally different for mobile? Instead we have [extended the protocol](https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md)
-with extra API methods useful for mobile automation.
+Atendendo o requisito #3 do mesmo jeio: WebDriver se tornou de fato
+automatizador dos navegadores web padrão, e é um [W3C Working Draft](https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html).
+Porque fazer algo totalmente diferente para mobile? Em vez disso, temos [ampliado o protocolo](https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md)
+com métodos de API extras, úteis para automação mobile.
 
-It should be obvious that requirement #4 is a given -- you're reading this
-because [Appium is open source](https://github.com/appium/appium).
+E deve ser óbvio que o requisito #4 foi atendido -- Voce está lendo isso
+Porque [Appium é open source](https://github.com/appium/appium).
 
-### Appium Concepts
+### Conceitos do Appium
 
-**Client/Server Architecture**<br/>
-Appium is at its heart a webserver that exposes a REST API. It receives
-connections from a client, listens for commands, executes those commands on a
-mobile device, and responds with an HTTP response representing the result of
-the command execution. The fact that we have a client/server architecture
-opens up a lot of possibilities: we can write our test code in any language
-that has a http client API, but it is easier to use one of the [Appium client
-libraries](http://appium.io/downloads). We can put the server on a different machine than our
-tests are running on. We can write test code and rely on a cloud service
-like [Sauce Labs](https://saucelabs.com/mobile) to receive and interpret the commands.
+**Arquitetura Client/Server**<br/>
+Appium é, em seu coração, um webserver que expõe um REST API. Ele recebe
+conexões de um cliente, escuta comandos, executa comandos em um celular (ou tablet),
+e responde como um retorno HTTP representando o resultado do
+comando executado. O fato de possuirmos uma arquitetura client/server
+abre um monte de possibilidades: nos podemos escrever nosso código de teste em qualquer linguagem
+que possua um cliente HTTP, mas é mais fácil usar um dos nossos [Appium client
+libraries](http://appium.io/downloads). Podemos colocar o servidor em uma máquina que é diferente
+de onde nossos testes estão sendo executados. Podemos escrever testes automatizados e contar com um 'cloud service',
+como [Sauce Labs](https://saucelabs.com/mobile), para receber e interpretar os comandos.
 
-**Session**<br/>
-Automation is always performed in the context of a session. Clients initiate
-a session with a server in ways specific to each library,
-but they all end up sending a `POST /session` request to the server,
-with a JSON object called  the 'desired capabilities' object. At this point
-the server will start up the automation session and respond with a session ID
-which is used for sending further commands.
+**Sessões**<br/>
+A automação é sempre realizada no contexto de uma sessão. Os clientes
+iniciam uma sessão com o servidor de formas específicas a cada biblioteca,
+mas todos eles acabam enviando uma requisição `POST /session` ao servidor,
+com um objeto JSON chamado 'desired capabilities'. Neste ponto
+o servidor irá iniciar a sessão e responderá com um 'ID Session'
+que será usado para enviar comandos adicionais.
 
 **Desired Capabilities**<br/>
-Desired capabilities are a set of keys and values (i.e.,
-a map or hash) sent to the Appium server to tell the server what kind of
-automation session we're interested in starting up. There are also various
-capabilities which can modify the behavior of the server during automation.
-For example, we might set the `platformName` capability to `iOS` to tell
-Appium that we want an iOS session, rather than an Android or Windows one. Or we might
-set the `safariAllowPopups` capability to `true` in order to ensure that,
-during a Safari automation session, we're allowed to use JavaScript to open
-up new windows. See the [capabilities doc](/docs/en/writing-running-appium/caps.md) for the complete list of capabilities available for Appium.
+Desired capabilities são um conjunto de chaves e valores (i.e.,
+a map or hash) enviando ao Appium server para informar o server o tipo de
+'automation session' estamos interessados em inicializar. Existem também
+capacidades que podem modificar o comportamento do server durante a automação.
+Por exemplo, podemos definir o recurso `platformName` para `iOS` para informar
+Appium que queremos uma sessão iOS, ao invés de  Android ou Windows. Ou podemos
+definir a capacidade `safariAllowPopups` para `true` para garantir que,
+durante uma sessão de automação com Safari, estamos autorizados para usar Javascript
+para abrir novas janelas. Veja o [capabilities doc](/docs/en/writing-running-appium/caps.md) para uma lista completa 
+recursos disponíveis para o Appium.
 
 **Appium Server**<br/>
-Appium is a server written in Node.js. It can be built and installed [from source](https://github.com/appium/appium/blob/master/docs/en/contributing-to-appium/appium-from-source.md) or installed directly from NPM:
+Appium is a server é programado em Node.js. Pode ser compilado e instalado pelo [Código fonte](https://github.com/appium/appium/blob/master/docs/en/contributing-to-appium/appium-from-source.md) ou instalado diretamente
+do NPM:
 ```
 $ npm install -g appium
 $ appium
 ```
 
-**Appium Clients**<br/>
-There are client libraries (in Java, Ruby, Python, PHP, JavaScript, and C#)
-which support Appium's extensions to the WebDriver protocol. When using Appium,
-you want to use these client libraries instead of your regular WebDriver
-client. You can view the full list of libraries [here](appium-clients.md).
+**Clientes Appium**<br/>
+Existem bibliotecas (em Java, Ruby, Python, PHP, JavaScript, and C#)
+que suportam extensões do Appium para o protocolo WebDriver. Ao usar Appium,
+voce pode usar essas bibliotecas em vez do seu WebDriver
+client normal. Voce pode ver a lista completa de bibliotecas [aqui](appium-clients.md).
 
 **[Appium.app](https://github.com/appium/appium-dot-app), [Appium.exe](https://github.com/appium/appium-dot-exe)**<br/>
-There exist GUI wrappers around the Appium server that can be downloaded.
-These come bundled with everything required to run the Appium server,
-so you don't need to worry about Node. They also come with an Inspector,
-which enables you to check out the hierarchy of your app. This can come in handy when writing tests.
+Existem um GUI em torno do Appium server que pode ser efetuado o download.
+Estes vem com tudo o que é necessário para executar o Appium server,
+assim voce não precisa se preocupar com o Node. Eles também vem com um inspetor de elementos,
+que permite inspecionar a estrutura e hierarquia do seu app. Isso pode ser útil quando se escreve os testes.
 
-### Getting Started
+### Iniciando
 
-Congratulations! You are now armed with enough knowledge to begin using Appium. Why not head to the [getting started doc](https://github.com/appium/appium/blob/master/README.md) for more detailed requirements and instructions?
+Parabéns! Voce agora possui o conhecimento suficiente para começar usar Appim. Por que não ir para [getting started doc](https://github.com/appium/appium/blob/master/README.md) para obter mais informações e requisitos mais detalhados?
