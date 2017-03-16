@@ -1,12 +1,12 @@
-## List of client libraries with Appium server support
+## Lista de bibliotecas com suporte ao Appium server
 
-These libraries wrap standard Selenium client libraries to provide all the regular selenium commands dictated by the [JSON Wire protocol](https://w3c.github.io/webdriver/webdriver-spec.html), and add extra commands related to controlling mobile devices, such as **multi-touch gestures** and **screen orientation**.
+Essas bibliotecas envolvem bibliotecas padrões Selenium para fornecer todos os comandos regulares orientados pelo [JSON Wire protocol](https://w3c.github.io/webdriver/webdriver-spec.html), e adicionar comandos extras relacionados ao controle dos dispositivos, como **multi gestos[multi-touch gestures]** and **orientação da tela[screen orientation]**.
 
-Appium client libraries implement the [Mobile JSON Wire Protocol](https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md) (an official draft extension to the standard protocol), and elements of the [W3C Webdriver spec](https://dvcs.w3.org/hg/webdriver/raw-file/default/webdriver-spec.html) (a transport-agnostic automation spec; this is where the MultiAction API is defined).
+As bibliotecas do Appium implementam [Mobile JSON Wire Protocol](https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md) (um projeto de extensão oficial para o protocolo), e elementos do [W3C Webdriver spec](https://dvcs.w3.org/hg/webdriver/raw-file/default/webdriver-spec.html) (uma especificação de automação ; onde é definida a API MultiAction).
 
-The Appium server itself defines custom extensions to the official protocols, giving Appium users helpful access to various device behaviors (such as installing/uninstalling apps during the course of a test session). This is why we need Appium-specific clients, not just the 'vanilla' Selenium clients. Of course, Appium client libraries only **add** functionality (in fact, they simply extend the standard Selenium clients), so they can still be used to run regular Selenium sessions.
+O próprio Appium server define extensões customizadas para os protocolos oficiais, dando aos usuários do Appium acesso a vários comportamentos dos dispositívos úteis (como instalar/desinstalar apps durante o andamento de uma sessão). É por isso que precisamos de clientes específicos para Appium, e não apenas os 'vanilla' Selenium clients. Claro que, as bibliotecas do Appium apenas **adicionam** funcionalidades (na verdade, eles simplesmente extendem os 'standard Selenium clients'), então eles ainda podem ser usados para executar sessões normais de Selenium.
 
-Language/Framework | Github Repo and Installation Instructions |
+Language/Framework | Github Repo and instruções de instalação |
 ----- | ----- |
 Ruby | [https://github.com/appium/ruby_lib](https://github.com/appium/ruby_lib)
 Python | [https://github.com/appium/python-client](https://github.com/appium/python-client)
