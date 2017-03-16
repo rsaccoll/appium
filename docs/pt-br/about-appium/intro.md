@@ -1,21 +1,21 @@
 ## Introdução ao Appium
 
-Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms.  **Native apps** are those written using the iOS, Android, or Windows SDKs.  **Mobile web apps** are web apps accessed using a mobile browser (Appium supports Safari on iOS and Chrome or the built-in 'Browser' app on Android).  **Hybrid apps** have a wrapper around a "webview" -- a native control that enables interaction with web content. Projects like [Phonegap](http://phonegap.com/), make it easy to build apps using web technologies that are then bundled into a native wrapper, creating a hybrid app.
+Appium é uma ferramenta de código aberto para automatizar apps nativos, mobile web e apps híbridos em iOS, Android mobile e Windows desktop platforms.  **Apps nativos** são aqueles escritos usando o iOS, Android, or Windows SDKs.  **Mobile web apps** são acessados usando um navegador para dispositivos móveis (o Appium suporta o Safari no iOS e Chrome ou o app chamado 'Browser' no Android).  **Apps Híbridos** tem um 'wrapper' em torno de uma webview -- um controle nativo que permite interação com o conteúdo web. Projetos como [Phonegap](http://phonegap.com/), facilitam a criação de aplicativos usando tecnologias Web, que são empacotadas em um wrapper nativo, criando um aplicativo híbrido.
 
-Importantly, Appium is "cross-platform": it allows you to write tests against
-multiple platforms (iOS, Android, Windows), using the same API. This enables code reuse between iOS, Android, and Windows testsuites.
+Importante, Appium é "cross-platform": permite escrever testes contra
+plataforma múltiplas (iOS, Android, Windows), usando a mesma API. Isso permite a reutilização do código entre iOS, Android, e Windows planos de teste.
 
-For specific information about what it means for Appium to "support" its
-platforms, and automation modalities, please see the [platform support doc](/docs/en/appium-setup/platform-support.md).
+Para obter informações específicas o que significa para o Appium o "apoiar" as
+plataformas, e as modalidades de automação, consulte o [Documento de suporte a plataforma](/docs/pt-br/appium-setup/platform-support.md).
 
 ### Filosofia do Appium
 
-Appium was designed to meet mobile automation needs according to a philosophy outlined by the following four tenets:
+Appium foi projetado para atender às necessidades de automação móvel de acordo com uma filosofia delineada pelos quatros príncipios a seguir:
 
-1. You shouldn't have to recompile your app or modify it in any way in order to automate it.
-2. You shouldn't be locked into a specific language or framework to write and run your tests.
-3. A mobile automation framework shouldn't reinvent the wheel when it comes to automation APIs.
-4. A mobile automation framework should be open source, in spirit and practice as well as in name!
+1. Você não deve ter que recompilar seu aplicativo ou modificá-lo de forma alguma para automatizá-lo.
+2. Você não deve ser bloqueado em um idioma específico ou estrutura para escrever e executar seus testes.
+3. Um mobile automation framework não deve reinventar a roda quando se trata de  automation APIs.
+4. Um mobile automation framework deve ser de código aberto, em espírito e prática, bem como em nome!
 
 ### Appium Design
 
