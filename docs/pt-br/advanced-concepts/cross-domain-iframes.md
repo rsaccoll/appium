@@ -1,6 +1,6 @@
-## Cross-domain iFrame Automation
+## Automação de Cross-domain iFrame 
 
-[Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) prevents Appium from automating iFrames that have a different domain to the parent.
+[Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) impede o Appium de automatizar iFrames que tenham domínios defirentes do principal.
 
 ### Subdomain workaround
 If the parent and the iFrame share the same domain (e.g. `site.com` and `shop.site.com`), you can
