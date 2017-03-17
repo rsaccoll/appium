@@ -1,23 +1,23 @@
 ## Selenium Grid
 
-You are able to register your appium server with a local [Selenium grid](https://code.google.com/p/selenium/wiki/Grid2) ([setup docs](http://docs.seleniumhq.org/docs/07_selenium_grid.jsp)) by using the
-`--nodeconfig` server parameter.
+Voce pode registrar o seu Appium server em um [Selenium grid](https://code.google.com/p/selenium/wiki/Grid2) ([setup docs](http://docs.seleniumhq.org/docs/07_selenium_grid.jsp)) usando o
+`--nodeconfig` parametro.
 
 ```center
 > appium --nodeconfig /path/to/nodeconfig.json
-# or, if running from source:
+# ou, se está usando pelo código fonte:
 > node . --nodeconfig /path/to/nodeconfig.json
 ```
 
-In the node config file you have to define the `browserName`,
-`version` and `platform` and based on these parameters the grid
-will re-direct your test to the right device. You will also need to
-configure your **host** details and the **selenium grid** details. For
-a full list of all parameters and descriptions look
-[here](http://code.google.com/p/selenium/source/browse/java/server/src/org/openqa/grid/common/defaults/GridParameters.properties)
+No arquivo de configuração do node voce tem que definir o `browserName`,
+`version` e `platform` e com base nesses parametros o grid irá redirecionar os testes para o dispositivo correto.
+Voce também precisará
+configurar seus **host details**  e o **selenium grid details** . Para
+uma lista completa de todos os parametros e descrições veja
+[aqui](http://code.google.com/p/selenium/source/browse/java/server/src/org/openqa/grid/common/defaults/GridParameters.properties)
 
-Once you start the appium server and it registers with the grid,
-you will see your device on the grid console page:
+Uma vez iniciado o Appium server e registrado no grid,
+voce verá seu dispositivo na página do console grid:
 
 "http://**\<grid-ip-adress\>**:**\<grid-port\>**/grid/console"
 
@@ -51,9 +51,9 @@ you will see your device on the grid console page:
 }
 ```
 
-Valid platforms are listed [here](http://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/Platform.html)
+Plataformas válidas são listadas [aqui](http://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/Platform.html)
 
-If `url`, `host`, and `port` are not given, the config will be auto updated
-to point to localhost:whatever-port-Appium-started-on.
+Se `url`, `host`, e `port` não são fornecidas, a configuração será atualizada
+automaticamente para apontar para "localhost:whatever-port-Appium-started-on".
 
-If your Appium server is running on a different machine to your Selenium Grid server, make sure you use an external name/IP address in your `host` & `url` docs; `localhost` and `127.0.0.1` will prevent Selenium Grid from connecting correctly.
+Se o seu Appium server está rodando em uma máquina diferente de onde está o Selenium Grid server, certifique-se de usar um nome/endereço de IP nos seus `host` & `url` docs; `localhost` e `127.0.0.1` inpedirá que o Selenium Grid de se conectar corretamente.

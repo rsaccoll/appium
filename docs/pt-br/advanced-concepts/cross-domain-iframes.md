@@ -2,9 +2,9 @@
 
 [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) impede o Appium de automatizar iFrames que tenham domínios defirentes do principal.
 
-### Subdomain workaround
-If the parent and the iFrame share the same domain (e.g. `site.com` and `shop.site.com`), you can
-set `document.domain` on both the parent and each iFrame to a common domain. This solves the same-origin policy issue and allows automation. For example:
+### Subdomain "Gambi"
+Se o parent e o IFrame estão sob o mesmo domínio (ex: `site.com` s `shop.site.com`), voce pode
+ajustar `document.domain` em ambos parent para cada iFrame possuir o mesmo domínio. Isso resolve o same-origin policy issue e permite a automação. Por examplo:
 
 Parent:
 ```
