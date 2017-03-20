@@ -1,33 +1,33 @@
 ## iOS WebKit Debug Proxy
 
-For accessing web views on real iOS device appium uses [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
+Para acessar as web views em dispositivos físicos, o appium para iOS, usa o [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
 
-### Installation
+### Instalação
 
-#### Using Homebrew
+#### Usando o Homebrew
 
-To install the latest tagged version of the ios-webkit-debug-proxy using
-Homebrew, run the following commands in the terminal:
+Para instalar a versão mais recente do ios-webkit-debug-proxy usando o
+Homebrew, execute os seguintes comandos via terminal:
 
  ``` center
- # The first command is only required if you don't have brew installed.
+ # O primeiro comando só é necessário senão tiver o brew instalado
  > ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
  > brew update
  > brew install ios-webkit-debug-proxy
  ```
 
-#### Building ios-webkit-debug-proxy from source
+#### Compilando ios-webkit-debug-proxy apartir do código fonte
 
-Open the command terminal on your mac. You can find instructions on how to open the
-terminal via your favorite search engine. Once that is open, verify you have
+Abra o seu terminal no mac. Voce pode achar informações sobre como abrir o terminal
+através de seu mecanismo de busca. Assim que estiver aberto, verifique se
 [Homebew](http://brew.sh/) installed:
 
 ```shell
 $ brew -v
 ```
 
-When you're certain you have Homebrew, do the following (the $ indicates the command
-line prompt, do not enter it):
+Quando confirmar que já tem instalado o Homebrew, execute os seguintes comandos (O símbolo '$' indica linha de
+comando, não escreva ele):
 
 ```shell
 $ cd  ~
@@ -39,9 +39,9 @@ $ make
 $ sudo make install
 ```
 
-#### Running ios-webkit-debug-proxy
+#### Executando ios-webkit-debug-proxy
 
-Once installed you can start the proxy with the following command:
+Uma vez instalado, voce pode iniciar o proxy com o seguinte comando:
 
 ``` center
 # Change the udid to be the udid of the attached device and make sure to set the port to 27753
@@ -50,9 +50,9 @@ Once installed you can start the proxy with the following command:
 > ios_webkit_debug_proxy -c 0e4b2f612b65e98c1d07d22ee08678130d345429:27753 -d
 ```
 
-You may also use `ios-webkit-debug-proxy-launcher`, a small script included with the Appium codebase, to launch the
-proxy. It monitors the proxy log for errors, and relaunch the proxy
-where needed. This is also optional and may help with recent devices:
+Voce também pode usar o `ios-webkit-debug-proxy-launcher`, um pequeno script no código fonte do appium, para iniciar
+o proxy. Ele monitora o log do proxy para erros, e reiniciar o proxy se necessário. Isso também é opcional e pode ajudar
+dispositivos mais atuais:
 
 ``` center
 # change the udid
@@ -60,7 +60,6 @@ where needed. This is also optional and may help with recent devices:
 > ./bin/ios-webkit-debug-proxy-launcher.js -c 0e4b2f612b65e98c1d07d22ee08678130d345429:27753 -d
 ```
 
-**NOTE:** the proxy requires the **"web inspector"** to be turned on to
-allow a connection to be established. Turn it on by going to **settings >
-safari > advanced**. Please be aware that the web inspector was **added as
-part of iOS 6** and was not available previously.
+**NOTA:** o proxy requer que o **"web inspector"** seja ativado para 
+permitir estabelecer uma conexão. Para ativar, basta ir em **settings >
+safari > advanced**. Lembre-se que o web inspector foi adicionado como parte do iOS 6 e não estava disponível anteriormente.
