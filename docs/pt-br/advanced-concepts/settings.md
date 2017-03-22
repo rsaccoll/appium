@@ -1,23 +1,23 @@
 ## Settings
 
-Settings are a new concept introduced by appium. They are currently not a part of the Mobile JSON Wire Protocol, or the Webdriver spec.
+Settings são um novo conceito introduzido pelo Appium. Eles atualmente não fazem parte do Mobile JSON Wire Protocol, ou do Webdriver spec.
 
-Settings are a way to specify the behavior of the appium server.
+As configurações são uma maneira de especificar o comportamento do Appium server.
 
-Settings are:
- - Mutable, they can be changed during a session
- - Only relevant during the session they are applied. They are reset for each new session.
- - Control the way the appium server behaves during test automation. They do not apply to controlling the app or device under test.
+Settings são:
+ - Mútaveis, podem ser alterados durante uma sessão.
+ - Apenas relevantes durante a sessão que foram ajustados. Serão redefinidos a cada nova sessão.
+ - Controle do comportamento do Appium server durante a automação dos testes. Eles não se aplicam ao controle do app ou do device sob teste.
 
-An example of a setting would be `ignoreUnimportantViews` for Android. Android can be set to ignore elements in the View Hierarchy which it deems irrelevant. Setting this can cause tests to run faster. A user who *wants* to access the ignored elements however, would want to disable `ignoreUnimportantViews`, and reenable it afterwards.
+Um exemplo de uma configuração seria o `ignoreUnimportantViews` para Android. O Android pode ser configurado para ignorar elementos em sua hierarquia (que se apresentam irrelevantes). Essa configuraç!ao pode fazer com que os testes sejam executados mais rapidamente. Um usuário que *quer* acessar esse elementos irrelevantes, poderia desabilitar o `ignoreUnimportantViews`, e depois reabilitar novamente.
 
-Another example of a use-case for settings would be telling appium to ignore elements which are not visible.
+Outro exemplo de um caso de uso para os Settings seria configurar o Appium para ignorar elementos que não são visíveis.
 
-Settings are implemented via the following API endpoints:
+Settings são implementados através dos seguintes Endpoints da API:
 
 **POST** /session/:sessionId/appium/settings
 
->Expects a JSON hash of settings, where keys correspond to setting names, and values to the value of the setting.
+>Espera um JSON, onde as chaves correspondem ao "settings name", e os valores ao valor da configuração.
 ```
 {
   settings: {
@@ -28,29 +28,29 @@ Settings are implemented via the following API endpoints:
 
 **GET** /session/:sessionId/appium/settings
 
->Returns a JSON hash of all the currently specified settings.
+>Retorna um JSON de todas as confgurações especificadas atulamente.
 ```
 {
   ignoreUnimportantViews : true
 }
 ```
 
-Note that the actual commands you would use in your test script differ based on the language; see the specific Appium client documention for more information.
+Observe que os comandos reais que voce usaria no seu script de teste diferem com base na linguagem. Consulte a documentação específica do Appium client para obter mais informações.
 
-### Supported Settings
+### Settins suportados
 
-**"ignoreUnimportantViews"** - Boolean which sets whether Android devices should use `setCompressedLayoutHeirarchy()` which ignores all views which are marked IMPORTANT_FOR_ACCESSIBILITY_NO or IMPORTANT_FOR_ACCESSIBILITY_AUTO (and have been deemed not important by the system), in an attempt to make things less confusing or faster.
+**"ignoreUnimportantViews"** - Boolean que define se os devices Android deve usar `setCompressedLayoutHeirarchy()` que ignora todas as views que foram marcadas como IMPORTANT_FOR_ACCESSIBILITY_NO ou IMPORTANT_FOR_ACCESSIBILITY_AUTO (e foram consideradas não importantes pelo sistema), em uma tentativa de tornar as coisas menos confusas ou mais rápidas.
 
 #### Android UiAutomator Configurator
 
-sets [UiAutomator Configurator](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html) timeouts and delays in Android devices. only works in Android API 18 and above.
+seta [UiAutomator Configurator](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html) timeouts e delays nos Android devices. Só funciona no Android API 18 e superior.
 
-**"actionAcknowledgmentTimeout"** - Int which is the same as [setActionAcknowledgmentTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setActionAcknowledgmentTimeout(long)). If a negative value is given, it would set to default(3 * 1000 milliseconds)
+**"actionAcknowledgmentTimeout"** - Int que é o mesmo que [setActionAcknowledgmentTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setActionAcknowledgmentTimeout(long)). Se for dado um valor negativo, ele será definido com o padrão(3 * 1000 milliseconds).
 
-**"keyInjectionDelay"** - Int which is the same as [setKeyInjectionDelay](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setKeyInjectionDelay(long)). If a negative value is given, it would set to default(0 milliseconds)
+**"keyInjectionDelay"** - Int que é o mesmo que [setKeyInjectionDelay](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setKeyInjectionDelay(long)). Se for dado um valor negativo, ele será definido com o padrão(0 milliseconds)
 
-**"scrollAcknowledgmentTimeout"** - Int which is the same as [setScrollAcknowledgmentTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setScrollAcknowledgmentTimeout(long)). If a negative value is given, it would set to default(200 milliseconds)
+**"scrollAcknowledgmentTimeout"** - Int que é o mesmo que [setScrollAcknowledgmentTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setScrollAcknowledgmentTimeout(long)). Se for dado um valor negativo, ele será definido com o padrão(200 milliseconds)
 
-**"waitForIdleTimeout"** - Int which is the same as [setWaitForIdleTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setWaitForIdleTimeout(long)). If a negative value is given, it would set to default(10 * 1000 milliseconds)
+**"waitForIdleTimeout"** - Int que é o mesmo que [setWaitForIdleTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setWaitForIdleTimeout(long)). Se for dado um valor negativo, ele será definido com o padrão(10 * 1000 milliseconds)
 
-**"waitForSelectorTimeout"** - Int which is the same as [setWaitForSelectorTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setWaitForSelectorTimeout(long)). If a negative value is given, it would set to default(10 * 1000 milliseconds)
+**"waitForSelectorTimeout"** - Int que é o mesmo que [setWaitForSelectorTimeout](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html#setWaitForSelectorTimeout(long)). Se for dado um valor negativo, ele será definido com o padrão(10 * 1000 milliseconds)

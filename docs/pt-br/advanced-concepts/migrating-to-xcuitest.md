@@ -1,110 +1,110 @@
-## Migrating your iOS tests from UIAutomation (iOS 9.3 and below) to XCUITest (iOS 9.3 and up)
+## Migrando seus Testes d iOS do UIAutomation (iOS 9.3 e posteriores) para XCUITest (iOS 9.3 e superiores)
 
-For iOS automation, Appium relies on system frameworks provided by Apple. For iOS 9.2 and below, Apple's only automation technology was called UIAutomation, and it ran in the context of a process called "Instruments". As of iOS 10, Apple has completely removed the UIAutomation instrument, thus making it impossible for Appium to allow testing in the way it used to. Fortunately, Apple introduced a new automation technology, called XCUITest, beginning with iOS 9.3. For iOS 10 and up, this will be the only supported automation framework from Apple.
+Para automação no iOS, o Appium depende do framework fornecido pela Apple. Para iOS 9.2 e posteriores, a única tecnologia de automação fornecida pela Apple era chamado de UIAutomation, e funcionava no contexto de um processo chamado "Instruments". Apartir do iOS 10, a Apple removeu completamente o UIAutomation, isso impossibilitou o Appium de permitir da maneira que costumava pertmitir. Felizmente a Apple introduziu um novo framework chamado XCUITest, começando com o iOS 9.3. Para iOS 10 e superiores, está será o único framework suportado pela Apple.
 
-Appium has built in support for XCUITest beginning with Appium 1.6. For the most part, the capabilities of XCUITest match those of UIAutomation, and so the Appium team was able to ensure that test behavior will stay the same. This is one of the great things about using Appium! Even with Apple completely changing the technology your tests are using, your scripts can stay mostly the same! That being said, there are some differences you'll need to be aware of which might require modification of your test scripts if you want to run them under our XCUITest automation backend. This document will help you with those differences.
+Appium começou o suporte para o XCUITest na versão Appium 1.6. Para a maior parte, as capacidades do XCUITest correspondem com as do UIAutomation, e assim a equipe do Appium foi capaz de garantir que o comportamento dos testes permanecerão o mesmo. Isso é uma das coisas mais legais em usar Appium! Mesm com a Apple alterando completamente o framework dos seus testes, seus scripts podem ficar iguais (a grande maioria =) ). Dito isso, existem algumas diferenças que voce precisa estar ciente e podem exigir modificação nos seus scripts de teste, se quiser rodar com o XCUITest. Este documento irá ajudá-lo com essas diferenças.
 
 ### Element class name schema
 
-With XCUITest, Apple has given different class names to the UI elements which make up the view hierarchy. For example, `UIAButton` is now `XCUIElementTypeButton`. In many cases, there is a direct mapping between these two classes. If you use the `class name` locator strategy to find elements, Appium 1.6 will rewrite the selector for you. Likewise, if you use the `xpath` locator strategy, Appium 1.6 will find any `UIA*` elements in your XPath string and rewrite them appropriately.
+Com o XCUITest, Apple deu diferentes nome de classes aos seus "UI Elements" que compõem a hierarquia da view. Por examplo, `UIAButton` agora é chamado de `XCUIElementTypeButton`. Em muitos casos, há um mapeamento entre essas duas classes. Se voce usa a estratégia de buscar o elemento por `class name`, Appium 1.6 irá reescrever o seletor para voce. Da mesma forma, se voce usa a estratégia de buscar o elemento por `xpath`, Appium 1.6 irá procurar quaisquer elementos `UIA*` e os reescreverá adequadamente.
 
-This does not however guarantee that your tests will work exactly the same, for two reasons:
+Entretanto isso não garante que seus testes funcionem exatamente da mesma maneira por dois motivos:
 
-1. The application hierarchy reported to Appium will not necessarily be identical within XCUITest to what it was within UIAutomation. If you have a path-based XPath selector, it may need to be adjusted.
-2. The list of class names is not entirely identical either. Many elements are returned by XCUITest as belonging to the `XCUIElementTypeOther` class, a sort of catch-all container.
+1. A hierarquia do app encontrada pelo Appium não será, necessariamente, identica dentro do XCUITest da mesma forma que era apresentada no UIAutomation. Se a sua estratégia de busca de elementos for por xpath, talvez precise ser ajustado.
+2. A lista de  class names não é inteiramente identica. Muitos elementos retornados pelo XCUITest como pertencentes a classe `XCUIElementTypeOther` , que é um tipo de container que "pega tudo" que não tenha definição.
 
-### Page source
+### Codigo fonte da página
 
-As mentioned just above, if you rely on the app source XML from the `page source` command, the XML output will now differ significantly from what it was under UIAutomation.
+Como mencionado acima, se confiar no XML de origem do app pelo comando `page source`, o XML de retorno terá uma diferença significativa em relação ao do UIAutomation.
 
 ### `-ios uiautomation` locator strategy
 
-This locator strategy was specifically built on UIAutomation, so it is not included in the XCUITest automation backend. We will be working on a similar "native"-type locator strategy in coming releases.
+Essa estratégia foi especialmente desenvolvida para UIAutomation, portanto não está incluída no XCUITest. Estamos trabalhando em uma nova estratégia similar "nativa" para os próximos lançamentos.
 
 ### `xpath` locator strategy
 
-1. Try not to use XPath locators unless there is absolutely no other alternatives. In general, xpath locators might be times slower, than other types of locators like accessibility id, class name and predicate (up to 100 times slower in some special cases). They are so slow, because xpath location is not natively supported by Apple's XCTest framework.
+1. Tente não usar esse tipo de estratégia, a menos que não tenha nenhuma outra alternativa. Em geral, xpath locators podem ser mais lentos que outros tipo de locators, como accessibility id, class name e predicate (até 100 vezes mais lentos em alguns casos especiais). Eles são tão lentos, por que esse tipo de estratégia, xpath, não é suportada nativamente pelo framework XCTest.
 2. Use
 
 ```
 driver.findElement(x)
 ```
 
-call instead of
+em vez de
 
 ```
 driver.findElements(x)[0]
 ```
 
-to lookup single element by xpath. The more possible UI elements are matched by your locator the slower it is.
-3. Be very specific when locating elements by xpath. Such locators like
+para procurar um único elemento por xpath. Quanto mais possibilidades encontradas na UI, mais lento ele é.
+3. Seja muito detalhista ao procurar um elemento por xpath. Procurar como
 
 ```
 //*
 ```
 
-may take minutes to complete depending on how many UI elements your application has (e. g.
+pode demorar minutos a ser concluído, dependendo do número de elementos na UI da sua aplicação (ex:
 
 ```
 driver.findElement(By.xpath("//XCUIElementTypeButton[@value='blabla']"))
 ```
 
-is faster than
+é mais rápido que
 
 ```
 driver.findElement(By.xpath("//*[@value='blabla']"))
 ```
 
-or
+ou
 
 ```
 driver.findElement(By.xpath("//XCUIElementTypeButton")))
 ```
 
-4. In most cases it would be faster to perform multiple nested findElement calls than to perform a single call by xpath (e.g.
+4. Na maioria dos casos, seria mais rápido múltiplas chamadas, do tipo, findElement do que executar uma única chamada por xpath (ex:
 
 ```
 driver.findElement(x).findElement(y)
 ```
 
-is usually faster than
+é geralmente mais rápido do que
 
 ```
 driver.findElement(z)
 
 ```
 
-where x and y are non-xpath locators and z is a xpath locator).
+onde x e y não são xpath locators  e x é um xpath locator).
 
-### System dependencies
+### Dependencias
 
-In addition to the many gotchas that might come with upgrading any XCode installation (unrelated to Appium), Appium's XCUITest support requires a new system dependency: [Carthage](https://github.com/Carthage/Carthage). Appium Doctor has now been updated to ensure that the `carthage` binary is on your path.
+Além das muitas "pegadinhas" que podem vir com a atualização do XCode (não relacionadas ao Appium), o suporte do appium no XCUITest requer uma nova dependencia: [Carthage](https://github.com/Carthage/Carthage). Appium Doctor já foi atualizado para garantir que o Carthage esteja no path.
 
-### API differences
+### Diferenças na API
 
-Unfortunately, the XCUITest API and the UIAutomation API are not equivalent. In many cases (like with `tap/click`), the behavior is identical. But some features that were available in the UIAutomation backend are not yet available in the new XCUITest backend. These known lacking features include:
-* Geolocation support (e.g., `driver.location`)
-* Shaking the device
-* Locking the device
-* Rotating the device (note that this is *NOT* device _orientation_, which is supported)
+Infelizmente, a XCUITest API e UIAutomation API não são equivalentes. Em muitos casos(tipo `tap/click`), o comportamento é identico. Mas alguns recursos que estavam disponíveis no UIAutomation ainda não estão disponíveis no XCUITest. Esses recursos conhecidos faltantes incluem:
+* Geolocation support (ex: `driver.location`)
+* "Agitar" o device
+* Bloquear o device
+* Girar o device (no que esse  *NÃO* é o device _orientation_, que é suportado)
 
-We will endeavor to add these features back in future releases of Appium.
+Nós nos esforçaremos para adicionar esses recursos em futuras versões do Appium.
 
-#### Scrolling and clicking
+#### Scrolling e clicking
 
-In the previous UIAutomation-based driver, if you tried to click on an element that wasn't in view, UIAutomation would scroll to the element automatically and then tap it. With XCUITest, this is no longer the case. You are now responsible for ensuring your element is in view before interacting with it (the same way a user would be responsible for the same).
+No driver anterior (UIAutomation), se tentasse clicar em um elemento que não estivesse na view, UIAutomation "scrollava" para o elemento, automaticamente, e efetuava o clique. Com o XCUITest, este não é mais o caso. Agora voce é responsável por garantir que o seu elemento esteja visível antes de interagir com ele (da mesma forma que o usuário seria responsável pela mesma interação)
 
-### Other known issues
+### Outros problemas conhecidos
 
-Finally, a list of known issues with the initial 1.6 release (we'll strike through issues which have been resolved):
+Finalmente, uma lista de problemas já conhecidos com a versão 1.6 (vamos atacar os problemas que foram resolvidos)
 
-* ~~Unable to interact with elements on devices in Landscape mode (https://github.com/appium/appium/issues/6994)~~
-* `shake` is not implemented due to lack of support from Apple
-* `lock` is not implemented due to lack of support from Apple
-* Setting geo-location not supported due to lack of support from Apple
-* Through the TouchAction/MultiAction API, `zoom` gestures work but `pinch` gestures do not, due to an Apple issue.
-* Through the TouchAction/MultiAction API, `swipe` gestures are currently not supported, though they should be soon (https://github.com/appium/appium/issues/7573)
-* The capabilities `autoAcceptAlerts` and `autoDismissAlerts` do not currently work, and there is continued debate about whether we will be able to implement them in the future.
-* There is an issue with the iOS SDK such that PickerWheels built using certain API methods are not automatable by XCUITest. See https://github.com/appium/appium/issues/6962 for the workaround, to ensure your PickerWheels are built properly.
+* ~~Não é possível interagir com elementos nos devices no modo landscape (https://github.com/appium/appium/issues/6994)~~
+* `shake` não está implementado devido a falta de suporte da Apple
+* `lock` não está implementado devido a falta de suporte da Apple
+* `geo-location` não está implementado devido a falta de suporte da Apple
+* Através da TouchAction/MultiAction API, o gesto `zoom` funciona, mas o gesto `pinch` não, devido a um problema da Apple.
+* Através da TouchAction/MultiAction API, o gesto `swipe` atualmente não é suportado, embora eles devem estar em breve.(https://github.com/appium/appium/issues/7573)
+* As capacidades `autoAcceptAlerts` e `autoDismissAlerts` atualmente não funcionam, e há um debate contínuo se seremos capazes de implementá-los no futuro.
+* Existe um problema no iOS SDK que `PickerWheels` usando certos métodos da API, não são automatizáveis pelo XCUITest. See https://github.com/appium/appium/issues/6962 para uma solução alternativa, garatindo que `PickerWheels` sejam construídos corretamente.
 
-As far as possible, we will add the missing features and fix other known issues in future versions of Appium.
+O tando que for possível, iremos adicionar os recurso faltantes e corrigir outros problemas conhecidos nessa versão do Appium.
