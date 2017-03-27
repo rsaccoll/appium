@@ -1,33 +1,33 @@
 ## Android Setup
 
-To get started, you'll need to install Node.js (v4 or greater). Just
-follow the [instructions for your flavor of linux](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager).
+Para começar, voce precisará instalar o Node.js (v4 ou superior). Apenas
+siga as instruções [instructions for your flavor of linux](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager).
 
-Once you've got Node.js installed, install the [Android SDK](http://developer.android.com/sdk/index.html).
-You will need to run the `android` tool (included in the SDK, under the 'tools' directory).
+Depois de instalar o Node.js, instale o [Android SDK](http://developer.android.com/sdk/index.html).
+Voce precisará executar o `android tools` (incluída no SDK, no folder /tools)
 
-Run the `android` tool and use it to install an API Level 17 or greater.
+Execute o `android tools` e use para instalar API 17 ou superior.
 
-(If you want to run Appium from source, you will also need [Apache Ant](http://ant.apache.org/) to build the bootstrap jar that Appium uses for running against Android simulators/devices.)
+(Se quiser executar apartir do código fonte, irá precisar do [Apache Ant](http://ant.apache.org/) para 'buildar' o bootstrap jar que o appium usa para executar nos dispositivos/simuladores de Android)
 
-Finally, set `$ANDROID_HOME` to be your Android SDK path. If you unzipped the
-Android SDK to /usr/local/adt/, for example, you should add this to your
+Finalmente, 'setar' o `$ANDROID_HOME` para ser o caminho default do SDK do android. Se voce descompactar o
+Android SDK no local /usr/local/adt/, por exemplo, voce deve adicionar isso ao seu
 shell startup:
 
     export ANDROID_HOME="/usr/local/adt/sdk"
 
-Now you're set up to run Appium! (If you're running Appium from source, make sure to run `npm install` from your Appium checkout to install all the
-dependencies.)
+Agora está configurado para rodar Appium. (Se estiver executando apartir do código fonte, certifique-se de executar `npm install` do seu Appium checkout para instalar todas as
+dependencias)
 
-### Additional Setup for Older Versions of Android
+### Setup adicional para versões mais antigas de Android
 
-Appium uses, and comes prepackaged with, a project called [Selendroid](https://selendroid.io) for running Android
-versions 2.3 to 4.1.  Appium switches to using Selendroid automatically when it
-detects older versions, but there is some additional setup required if you're
-running from source.
+Appium usa e vem prepackaged com um projeto chamado [Selendroid](https://selendroid.io) para rodar versões de 
+Android 2.3 a 4.1.  O Appium muda automáticamente para o Selendroid quando
+detecta versões mais antigas, mas há configuração adicional necessária se 
+estiver usando o código fonte.
 
-* Make sure you have [Maven 3.1.1](http://maven.apache.org/download.cgi) or
-  newer installed (`mvn`).
+* Assegure-se que tenha o [Maven 3.1.1](http://maven.apache.org/download.cgi) ou
+  mais atual instalado (`mvn`).
 
 ### Running Appium Android Tests
 
