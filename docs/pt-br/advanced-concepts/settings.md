@@ -9,7 +9,7 @@ Settings são:
  - Apenas relevantes durante a sessão que foram ajustados. Serão redefinidos a cada nova sessão.
  - Controle do comportamento do Appium server durante a automação dos testes. Eles não se aplicam ao controle do app ou do device sob teste.
 
-Um exemplo de uma configuração seria o `ignoreUnimportantViews` para Android. O Android pode ser configurado para ignorar elementos em sua hierarquia (que se apresentam irrelevantes). Essa configuraç!ao pode fazer com que os testes sejam executados mais rapidamente. Um usuário que *quer* acessar esse elementos irrelevantes, poderia desabilitar o `ignoreUnimportantViews`, e depois reabilitar novamente.
+Um exemplo de uma configuração seria o `ignoreUnimportantViews` para Android. O Android pode ser configurado para ignorar elementos em sua hierarquia (que se apresentam irrelevantes). Essa configuração pode fazer com que os testes sejam executados mais rapidamente. Um usuário que *quer* acessar esse elementos irrelevantes, poderia desabilitar o `ignoreUnimportantViews`, e depois reabilitar novamente.
 
 Outro exemplo de um caso de uso para os Settings seria configurar o Appium para ignorar elementos que não são visíveis.
 
