@@ -1,13 +1,13 @@
-## Deploying an iOS app to a real device
+## Instalando um iOS app em um dispositivo físico
 
-To prepare for your Appium tests to run on a real device, you will need to:
+Para preparar os testes para serem executados em um dispositivo físico, voce precisará:
 
-1. Build your app with specific device-targeted parameters
-2. Use [ideviceinstaller](https://github.com/libimobiledevice/ideviceinstaller), a 3rd-party tool,
- to deploy this build to your device
+1. 'Buildar' seu app com específicos paramestros para o device em teste.
+2. Use o [ideviceinstaller](https://github.com/libimobiledevice/ideviceinstaller), um 3rd-party tool,
+ para fazer deploy esse build no seu dispositivo.
 
-### Xcodebuild with parameters:
-A newer xcodebuild now allows settings to be specified. Taken from [developer.apple.com](https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html):
+### Xcodebuild com parametros:
+Um novo xcodebuild agora permite que as configurações sejam especificadas. Tirado do [developer.apple.com](https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html):
 
 ```center
 xcodebuild [-project projectname] [-target targetname ...]
@@ -15,7 +15,7 @@ xcodebuild [-project projectname] [-target targetname ...]
              [buildaction ...] [setting=value ...] [-userdefault=value ...]
 ```
 
-This is a resource to explore the available [settings](https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-DontLinkElementID_10)
+Este é um recurso para explorar em [settings](https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-DontLinkElementID_10)
 
 ```center
 CODE_SIGN_IDENTITY (Code Signing Identity)
@@ -23,29 +23,29 @@ CODE_SIGN_IDENTITY (Code Signing Identity)
     Example value: iPhone Developer
 ```
 
-PROVISIONING_PROFILE is missing from the index of available commands,
-but may be necessary.
+PROVISIONING_PROFILE está ausente no índice de comandos disponíveis,
+mas pode ser necessário.
 
-Specify "CODE_SIGN_IDENTITY" & "PROVISIONING_PROFILE" settings in the
+Especifique as configurações "CODE_SIGN_IDENTITY" & "PROVISIONING_PROFILE" no
 xcodebuild command:
 
 ```center
 xcodebuild -sdk <iphoneos> -target <target_name> -configuration <Debug> CODE_SIGN_IDENTITY="iPhone Developer: Mister Smith" PROVISIONING_PROFILE="XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX"
 ```
 
-On success, the app will be built to your ```<app_dir>/build/<configuration>-iphoneos/<app_name>.app```
+Em caso de sucesso, o app estará ```<app_dir>/build/<configuration>-iphoneos/<app_name>.app```
 
 ### Deploy using ideviceinstaller
 
-To install the latest tagged version of the ideviceinstaller using
-Homebrew, run the following commands in the terminal:
+Para instalar a versão mais atual do ideviceinstaller usando o
+Homebrew, execute os seguintes comandos no terminal:
 
  ``` center
- # The first command is only required if you don't have brew installed.
+ # O primeiro comando só é necessário se você não tiver o homebrew instalado.
  > ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
  > brew update
  > brew install ideviceinstaller
  > ideviceinstaller -u <UDID of device> -i <path of .app/.ipa>
  ```
 
-Next: [Running Appium on Real Devices](real-devices.md)
+Proximo: [Running Appium on Real Devices](real-devices.md)

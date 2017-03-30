@@ -31,19 +31,19 @@ estiver usando o código fonte.
 
 ### Running Appium Android Tests
 
-To run tests on Linux, you will need to have the Android Emulator booted and
-running an AVD with API Level 17 or greater. Then run Appium (`appium`) after
-installing via NPM, or `node .` in the source directory if running from source.
+Para executar os testes no Linux, voce precisará ter o emulador inicializado e
+executando um AVD com API Level 17 ou superior. Então execute Appium (`appium`) depois
+de instalado via NPM, ou `node .` no diretório do código fonte se estiver executando apartir do código fonte.
 
-See the [server documentation](/docs/en/writing-running-appium/server-args.md) for all the command line arguments.
+Consulte o [server documentation](/docs/en/writing-running-appium/server-args.md) para todos os argumentos por linha de comando.
 
-### Notes
+### Notas
 
-* There exists a hardware accelerated emulator for android, it has its own
-  limitations. For more information you can check out this
+* Existe um 'hardware accelerated emulator for android', que tem suas
+  limitações. Para mais informações, pode consultar aqui
   [page](/docs/en/appium-setup/android-hax-emulator.md).
-* Make sure that `hw.battery=yes` in your AVD's `config.ini`, if you want to
-  run any of the Appium tests, or use any of the power commands. As of Android 5.0, this is the default.
-* Selendroid requires the following permission for instrumenting your app:
+* Certifique-se que `hw.battery=yes` no seu AVD's `config.ini`, se quiser
+  rodar qualquer teste do appium, ou usar qualquer comando relacionados a energia. Para Android 5.0 já é padrão.
+* Selendroid requer a seguinte permissão para instrumentar o seu app:
   `<uses-permission android:name="android.**permission.INTERNET"/>`,
-  please make sure your app has internet permission set when you are using selendroid or older versions of Android i.e. 2.3 to 4.1
+  certifique-se que o seu app tenha permissão de internet definida quando estiver usando o selendroid ou versões anteriores do Android (ex: 2.3 a 4.0).

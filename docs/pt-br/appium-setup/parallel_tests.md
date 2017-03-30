@@ -1,30 +1,30 @@
-## Parallel Android Tests
+## Testes em Android em Paralelo
 
-Appium provides a way for users to automate multiple Android sessions on a single machine. All it involves is starting multiple Appium servers with different flags.
+Appium fornece uma maneira para que os usuários automatizem múltiplas sessões em uma única máquina. Tudo o que envolve é iniciar vários servidores do Appium com diferentes flags.
 
-The important flags for automating multiple Android sessions are:
+As flags mais importantes para automatizar são:
 
-- `-p` the main Appium port
-- `-U` the device id
-- `-bp` the Appium bootstrap port
-- `--chromedriver-port` the chromedriver port (if using webviews or chrome)
-- `--selendroid-port` the selendroid port (if using selendroid)
+- `-p` Porta principal do Appium
+- `-U` O id do  device
+- `-bp` Porta bootstrap Appium
+- `--chromedriver-port` A porta do chromedriver (se estiver usando webviews ou o chrome)
+- `--selendroid-port` A porta do selendroid (se estiver usando selendroid)
 
-More information on these flags can be found [here](../writing-running-appium/caps.md).
+Mais informações sobre essas flags podem ser encontradas [aqui](../writing-running-appium/caps.md).
 
-If we had two devices with the ID's 43364 and 32456, we would start two different Appium servers with the following commands:
+Se tivessemos dois dispositivos com os respectivos ID's 43364 e 32456, iniciariamos dois servidores appium com os seguintes comandos:
 
 `node . -p 4492 -bp 2251  -U 32456`
 
 `node . -p 4491  -bp 2252 -U 43364`
 
-As long as your Appium and Appium bootstrap ports are between 0 and 65536, all they have to be is different so that two Appium servers aren't trying to listen on the same port. Be sure that your -u flag corresponds with the correct device ID. This is how Appium knows which device to communicate with, so it must be accurate.
+Enquanto as portas do Appium e Appium bootstrap ports estão entre 0 e 65536, tudo o que elas precisam é ser diferentes, pois os "Appiums servers" irão tentar escutar na mesma porta. Assegure-se que a sua flag -u flag corresponde ao ID do device corretamente. É assim que o Appium sabe com qual dispositivo irá se comunicar, por isso a precisão.
 
-If you are using chromedriver or selendroid, set a different port for each server.
+Se estiver usando ochromedriver ou selendroid, defina uma porta diferente para cada servidor.
 
-### Parallel iOS Tests
+### Testes paralelos em iOS
 
-Unfortunately, running local parallel iOS tests isn't currently possible. Unlike Android, only one version of the iOS simulator can be launched at a time, making it run multiple tests at once.
+Infelizmente não é possível executar testes em paralelo em testes locais. Ao contrário do Android, apenas um simulador de iOS pode ser inicializado cada vez, fazendo com que ele execute vários testes ao mesmo tempo.
 
-If you do want to run parallel iOS tests, you need to use Sauce. Simply upload your Appium test to Sauce, and it can run as many parallel iOS or Android tests as your account allows. See more about running your tests on Sauce [here](https://docs.saucelabs.com/tutorials/appium/).
+Se voce deseja executar testes em paralelo, voce precisa usar Sauce. Basta fazer o upload dos seus testes para o Sauce, e ele pode executar tantos testes em paralelos para iOS ou Android que a sua conta permitir. Veja como executar seus testes no Sauce [aqui](https://docs.saucelabs.com/tutorials/appium/).
 
