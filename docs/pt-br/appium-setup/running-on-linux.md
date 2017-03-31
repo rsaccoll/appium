@@ -1,12 +1,10 @@
-## Running Appium on Linux
+## Rodando Appium no Linux
 
-### Limitations
+### Limitações
 
-If you are running Appium on Linux, you cannot use the prebuilt '.app',
-which is built for OS X only. Additionally, you will not be able to test iOS
-apps because Appium relies on OS X-only libraries to support iOS testing.
+Se voce está usando Appium no Linux, voce não pode usar o  'Appium.app',
+que é compilado para OS-X e superior. Além disso, não poderá executar testes para apps iOS, por que o Appium depende de bibliotecas do OS-X (e superior) para suportar a execução dos testes.
 
 ### Setup (Android)
 
-Instructions for setting up Android and running tests on Linux are the same as
-those on Mac OS X. See the [Android setup docs](/docs/en/appium-setup/android-setup.md).
+As instruções para configurar o Android e executar testes no Linux são as mesmas informadas para OS-X. Veja em [Android setup docs](/docs/en/appium-setup/android-setup.md).

@@ -1,91 +1,77 @@
-## Appium on real iOS devices
+## Appium em dispositivos iOS físicos
 
-Appium has support for real device testing.
+Appium tem suporte para testes de dispositivos reais.
 
-To get started on a real device, you will need the following:
+Para começar os testes em dispositivos reais, voce precisará do seguinte:
 
-* An [Apple Developer ID](https://developer.apple.com/programs/ios/)
- and a valid Developer Account with a configured distribution certificate and
- provisioning profile.
-* An iPad or iPhone. Make sure this has been set up for development in Xcode. See [this article](https://developer.apple.com/library/ios/recipes/xcode_help-devices_organizer/articles/provision_device_for_development-generic.html) for more information.
-* A signed `.ipa` file of your app, or the source code to build one.
-* A Mac with [Xcode](https://itunes.apple.com/en/app/xcode/id497799835?mt=12)
- and the Xcode Command Line Developer Tools.
+* Um [Apple Developer ID](https://developer.apple.com/programs/ios/)
+ e uma conta de desenvolvedor válida com um certificado de distribuição e provisioning profile.
+* Um iPad ou iPhone. Certifique-se que o mesmo foi configurado para desenvolvimento no XCode. Veja [esse artigo](https://developer.apple.com/library/ios/recipes/xcode_help-devices_organizer/articles/provision_device_for_development-generic.html) para mais informações.
+* Um `.ipa` assinado do seu app, ou o código fonte para compilar.
+* Um Mac com [Xcode](https://itunes.apple.com/en/app/xcode/id497799835?mt=12)
+ e o Xcode Command Line Developer Tools.
 
 ### Provisioning Profile
 
-A valid iOS Development Distribution Certificate and Provisioning Profile are
-necessary to test on a real device. Your app will also need to be signed. You
-can find information about this in the [Apple documentation](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/TestingYouriOSApp/TestingYouriOSApp.html).
+Um certificado de distribuição e o Provisioning Profile são necessários para testar em um dispositivo físico. seu app também precisa estar 'assinado'. Voce
+pode encontrar informações sobre isso em [Apple documentation](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/TestingYouriOSApp/TestingYouriOSApp.html).
 
-Appium will attempt to install your app using Fruitstrap, but it is often easier
-to pre-install your app using Xcode to ensure there are no problems (see the [iOS deploy](ios-deploy.md) doc for more information).
+O Appium tentará instalar o seu app usando o Fruitstrap, mas muitas vezes é mais fácil tentar instalar o seu app pelo XCode para garantir que não ocorra problemas na instalação. (Veja isso em [iOS deploy](ios-deploy.md) para mais informações).
 
-### Testing using Xcode 8 (including iOS 10) with XCUITest
+### Usando o XCode para testes (incluindo o iOS 10) com o XCUITest
 
-This functionality currently depends on logging based on `idevicesyslog`, and
-port forwarding based on `iProxy`, both of which are part of `libimobiledevice`.
-Install it with [Homebrew](http://brew.sh/),
+Essa funcionalidade, atualmente, depende do log baseado no `idevicesyslog`, e
+port forwarding baseado no `iProxy`, os quais fazem parte do `libimobiledevice`.
+Instale os com [Homebrew](http://brew.sh/),
 
 ```
 brew install libimobiledevice
 ```
 
-Alternatively, logging can be done using `deviceconsole`, which is available
-[here](https://github.com/rpetrich/deviceconsole). To choose between them, use
-the desired capability `realDeviceLogger`, passing in the path to the logging
-program.
+Como alternativa, o registro pode ser feito via `deviceconsole`, que está disponível
+[aqui](https://github.com/rpetrich/deviceconsole). Para escolher entre eles, use
+a flag desired capability `realDeviceLogger`, passando qual log deseja utilizar.
 
 
-### Running your tests with Appium
+### Rodando seus testes com Appium
 
-Once your device and app are configured, you can run tests on that device by
-passing the `-U` or `--udid` flag to the server or the `udid` desired capability,
-and the bundle ID (if the app is installed on the device) or the path to the
-`.ipa` or `.apk` file via the `--app` flag or the `app` desired capability.
+Assim que o app e dispositivo estiverem prontos, voce pode executar os testes no dispositivo passando os argumentos `-U` ou `--udid` flag para o server ou `udid` desired capability,
+e o bundle ID (se o app estiver instalado no dispositivo) ou o caminho do
+`.ipa` ou `.apk` arquivo via `--app` flag ou o `app` desired capability.
 
 ### Server Arguments
 
-For example, if you are prelaunching your app and wish for Appium to force use
-a specific UDID, then you may use the below command:
+Por exemplo, se estiver inicializando o seu app e deseja que o appium 'forçe' o uso de um UDID, voce pode usar o seguinte comando
 
 ```center
 appium -U <udid> --app <path or bundle>
 ```
 
-This will start Appium and have Appium use the device to test the app.
+Isto iniciará o Appium forçando a usar esse dispositivo primeiro.
 
-Refer to the [Appium server arguments](/docs/en/writing-running-appium/server-args.md) page for more detail on
-the arguments that you can use.
+Consulte a pagina [Appium server arguments](/docs/en/writing-running-appium/server-args.md) para mais detalhes dos argumentos que pode usar.
 
 ### Desired Capabilities
 
-You can launch the app on a device by including the following desired
-capabilities in your tests:
+Voce pode iniciar o app em um dispositivo, incluindo as seguintes "capabilities" no seus testes:
 
 * `app`
 * `udid`
 
-Refer to the [Appium server capabilities](/docs/en/writing-running-appium/caps.md) page for more detail on
-the capabilities that you can use.
+Consulte a pagina [Appium server capabilities](/docs/en/writing-running-appium/caps.md) para mais detalhes das quais "capabilites" pode usar.
 
 ### Troubleshooting ideas
 
-0. Make sure UDID is correct by checking it in Xcode Organizer or iTunes. It
-   is a long string (20+ chars).
-0. Make sure that you can run your tests against the Simulator.
-0. Double check that you can invoke your automation from Instruments.
-0. Make sure Instruments is not already running.
-0. Make sure UI Automation is enabled on your device. Settings -> Developer -> Enable UI Automation
+0. Verifique se o UDID está correto, verificando no XCode organizer ou no Itunes. é uma string longa (mais de 20 caracteres)
+0. Certifique-se de que você pode executar seus testes no simulador.
+0.  Verifique se você pode executar sua automação apartir do Instruments.
+0. Certifique-se que o  Instruments ainda não está em execução.
+0. Certifique-se que o UI Automation está ativado no seu dispositivo. Settings -> Developer -> Enable UI Automation
 
-### Appium on real Android devices
+### Appium em dispositivos físicos com Android
 
-Hooray! There's nothing extra to know about testing real Android devices: it
-works exactly the same as testing on emulators. Make sure that your device
-can connect to ADB and has Developer Mode enabled. For testing Chrome on a real
-device, you're responsible for ensuring that Chrome of an appropriate version
-is installed.
+Hooray! Não a nada extra a se fazer para rodar em dispositivos físicos com Android: funciona exatamente com se teste com emuladores. Certifique-se que o seu dispositivo
+está conectado com o ADB e o modo desenvolvedor está ativo. Para estar no Chrome em dispositivos
+físicos, sua responsabilidade é verificar que o Chrome esteja em uma versão apropriada para testes.
 
-Also, you'll want to make sure that "Verify Apps" in settings is
-disabled/unchecked, otherwise it can prevent some of Appium's helper apps from
-launching and doing their job correctly.
+Além disso, voce precisa se certificar que o item "Fontes desconhecidas" esteja desmarcado/desativado, caso contrário pode impedir do apps de auxílio do Appium sejam instalado ou executem sua tarefa corretamente.
