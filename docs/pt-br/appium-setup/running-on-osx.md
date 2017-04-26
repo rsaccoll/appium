@@ -1,66 +1,60 @@
-## Running Appium on Mac OS X
+## Rodando Appium no Mac OS X
 
-Appium on OS X supports iOS and Android testing.
+Appium no OS X suporta testes para iOS e Android.
 
 ### System setup (iOS)
 
-* Appium requires Mac OS X 10.10 or greater.
-* Make sure you have Xcode and the iOS SDK(s) installed. Xcode version 7.1 is
-  recommended as earlier versions of Xcode are limited in which versions of iOS
-  they can test against. See the next section for more detail.
-* You need to authorize use of the iOS Simulator. See [below](#authorizing-ios-on-the-computer).
-* If you're on Xcode 7.x and up, Instruments Without Delay (IWD) does not work.
-  You can enable IWD (which will significantly speed up your tests) using [this
-  method](/docs/en/advanced-concepts/iwd_xcode7.md)
-* If you're on Xcode 6, you need to launch each simulator you intend to use
-  with appium in advance, and change the default to actually show the soft
-  keyboard if you want sendKeys to work. You can do this by clicking on any
-  textfield and hitting command-K until you notice the soft keyboard show up.
-* If you're on Xcode 6, you have a feature in Xcode called Devices
-  (command-shift-2). You need to make sure that whichever deviceName you choose
-  to use with Appium in your capabilities, there is only one of those per sdk
-  version. In other words, if you send in a deviceName cap of "iPhone 5s" and
-  a platformVersion cap of "8.0", you need to make sure that there is exactly
-  one device with the name "iPhone 5s" and the 8.0 sdk in your devices list.
-  Otherwise, Appium won't know which one to use.
-* In iOS 8, devices each have their own setting which enables or disables
-  UIAutomation. It lives in a "Developer" view in the Settings app. You need to
-  verify that UIAutomaion is enabled in this view before the simulator or
-  device can be automated.
+* Appium requer Mac OS X 10.10 ou superior.
+* Certifique-se que tenha o Xcode e iOS SDK(s) instalados. Xcode versão 7.1 é
+  recomendado como versões anteriores são limitadas para qual versão de iOS podem testar
+  Veja a proxima sessão para mais detalhes.
+* Voce precisa autorizar o uso do iOS simulator. Veja [abaixo](#autorizando-ios-no-seu-computador).
+* Se estiver no XCode  7.x ou superior, o IWD (instruments without delay) não funciona.
+  Voce pode ativar o IWD (o que acelerará significativamente os testes) usando [esse
+  método](/docs/en/advanced-concepts/iwd_xcode7.md)
+* Se voce estiver no Xcode 6, voce precisa lançar cada simulador que voce pretende usar 
+  com appium com antecedencia, e alterar o padrão para mostrar o teclado virtual
+  se voce quiser trabalhar com o sendKeys. Voce pode fazer isso clicando em qualquer campo de texto e apertando o command-K até que note o aparecimento do teclado.
+* Se voce estiver no Xcode 6, existe um recurso chamado Devices
+  (command-shift-2). Voce precisa ter certeza de que qualquer dispositivo que escolher, para usar com Appium, tenha apenas um daqueles por versão de SDK. Em outras palavras, se voce enviar um deviceName com "iPhone 5s" e
+  um platformVersion de "8.0", voce precisará ter certeza de que exista exatamente um dispositivo
+  com essas propriedades na usa lista.
+  Caso contrário, Appium não saberá qual usar.
+* No iOS 8, cada dispositivo tem sua própria configuração que habilita ou desabilita o
+  UIAutomation. Ele fica no "Developer" view nos settings do app. Voce precisará verificar se UIAutomation está habilitada
+  antes que o simulador ou dispositivo físico possa ser automatizado.
 
-### Authorizing iOS on the computer
+### Autorizando iOS no seu computador
 
-You need to authorize use of the iOS Simulator by running the `authorize-ios`
-binary made available through `npm`. Install the program by running
+Voce precisa autorizar o uso do iOS Simulador executando o `authorize-ios`,
+disponibilzado no `npm`. Instale o programa executando o
 
 ```
 npm install -g authorize-ios
 ```
 
-And the invoke the program using
+E use ele executando o comando
 
 ```
 sudo authorize-ios
 ```
 
-If you are running [Appium.app](https://github.com/appium/appium-dot-app), you can
-authorize iOS through the GUI.
+Se voce estiver usando o [Appium.app](https://github.com/appium/appium-dot-app), voce pode autorizar o iOS através do GUI.
 
-You need to do this every time you install a new version of Xcode.
+Voce precisa fazer isso sempre que instalar uma nova versão do XCode.
 
-### Testing against multiple iOS SDKs
+### Testando vários iOS SDK's 
 
-Xcode version 7.1 allows for automatic testing against iOS versions 7.1 and later.
+A versão 7.1 do XCode permite testes automáticos nas versões do iOS 7.1 e superiores.
 
-If you're using multiple Xcode versions, you can switch between them using:
+Se estiver usando várias versões do XCode, voce pode alternar elas usando o seguinte comando:
 
-    sudo xcode-select --switch &lt;path to required xcode&gt;
+    sudo xcode-select --switch &lt;caminho do xcode&gt;
 
-### Testing using Xcode 8 (including iOS 10) with XCUITest
+### Testando usando Xcode 8 (incluindo o iOS 10) com XCUITest
 
-In order to automate iOS devices with Xcode 8 (which includes all testing of iOS 10+),
-you need to install the [Carthage](https://github.com/Carthage/Carthage) dependency
-manager:
+Para automatizar dispositivos iOS (que inclui todos os testes do iOS 10+),
+voce precisa instalar um gerenciador de dependencia chamada [Carthage](https://github.com/Carthage/Carthage):
 
 ```
 brew install carthage
@@ -71,12 +65,11 @@ brew install carthage
 
 ### System setup (Android)
 
-Instructions for setting up Android and running tests on Mac OS X are the same as
-those on Linux. See the [Android setup docs](/docs/en/appium-setup/android-setup.md).
+As instruções para configurar o Android e executar os testes no MacOS são as mesmas que as de linux. Veja em [Android setup docs](/docs/en/appium-setup/android-setup.md).
 
-### Running iOS tests on OS X using Jenkins
+### Rodando testes iOS usando o Jenkins
 
-First download the jenkins-cli.jar and verify the Mac successfully connects to Jenkins master. Ensure you've run the `authorize-ios` command mentioned above.
+Primeiro faça o download do jenkins-cli.jar e verifique se o mac conecta com sucesso o master. Verifique que executou o comando `authorize-ios` mencionado abaixo.
 
 `wget https://jenkins.ci.cloudbees.com/jnlpJars/jenkins-cli.jar`
 
@@ -90,7 +83,7 @@ java -jar jenkins-cli.jar \
  -name mac_appium
  ```
 
-Next define a LaunchAgent for Jenkins to launch automatically on login. A LaunchDaemon will not work because daemons don't have GUI access. Make sure the plist doesn't contain the `SessionCreate` or `User` key as that may prevent tests from running. You'll see a `Failed to authorize rights` error if misconfigured.
+Em seguida defina um "LaunchAgent" para o jenkins iniciar automaticamente no login. Um "LaunchDaemon" não funcionará por que daemons não tem acesso ao GUI. Certifique-se que o  plist não contem `SessionCreate` ou `User` key pois isso pode impedir a execução dos testes. Voce verá o seguinte erro: `Failed to authorize rights` se houer algum problema na configuração.
 
 ```
 $ sudo nano /Library/LaunchAgents/com.jenkins.ci.plist
@@ -129,7 +122,7 @@ $ sudo nano /Library/LaunchAgents/com.jenkins.ci.plist
 </plist>
 ```
 
-Finally set the owner, permissions, and then start the agent.
+Finalmente ajuste o owner, permissões, e inicie o agent.
 
 ```
 sudo chown root:wheel /Library/LaunchAgents/com.jenkins.ci.plist
@@ -140,23 +133,22 @@ launchctl start com.jenkins.ci
 ```
 
 
-### Files generated by iOS test runs
+### Arquivos gerados por testes no iOS
 
-Testing on iOS generates files that can sometimes get large. These include logs,
-temporary files, and derived data from Xcode runs. Generally the following locations
-are where they are found, should they need to be deleted:
+Testes no iOS geram arquivos que as vezes podem ocupar muito espaço. Estes incluem logs,
+arquivos temporários, e dados derivados da execução do Xcode. Geralmente os seguintes locais onde eles estão são (caso precise excluir eles):
 
 ```
 $HOME/Library/Logs/CoreSimulator/*
 ```
 
-For Instruments-based tests (iOS _not_ using `XCUITest` as `automationName`):
+Para testes instrumentados (iOS _not_ using `XCUITest` como `automationName`):
 
 ```
 /Library/Caches/com.apple.dt.instruments/*
 ```
 
-For XCUITest-based tests:
+Para testes baseados no XCUITest:
 
 ```
 $HOME/Library/Developer/Xcode/DerivedData/*
