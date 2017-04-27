@@ -1,8 +1,8 @@
 ﻿#Windows Setup
 
-Appium on Windows supports both Windows and Android app automation!
+Appium no Windows suporta automação de apps para android e windows!
 
-See [Windows App Testing](/docs/en/writing-running-appium/windows-app-testing.md) for more details.
+Veja [Windows App Testing](/docs/en/writing-running-appium/windows-app-testing.md) para mais detalhes.
 
 ## Running Appium on Windows
 
