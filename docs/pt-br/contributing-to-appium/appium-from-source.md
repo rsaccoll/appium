@@ -1,10 +1,8 @@
-## Running Appium from Source
+## Rodando Appium pelo Código Fonte
 
-So you want to run Appium from source and help fix bugs and add features?
-Great! Just fork the project, make a change, and send a pull request! Please
-have a look at our [Style Guide](style-guide-2.0.md) before getting to work.
-Please make sure the unit and functional tests pass before sending a pull
-request; for more information on how to run tests, keep reading!
+Então, voce deseja executar o Appium e partir do código fonte e ajudar a corrigir bugs e adicionar recursos?
+Legal! Basta fazer um fork do projeto, fazer o ajuste, e mande um pull request! Por favor de uma olhada no nosso [Style Guide](style-guide-2.0.md) antes de começar a mexer.
+Por favor certifique-se que os testes unitários e funcionais passem antes de enviar um pull request. Para mais informações como executar os testes, continue lendo!
 
 Make sure you read and follow the setup instructions in the README first.
 
